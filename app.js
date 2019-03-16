@@ -4,8 +4,6 @@ var mongoose = require('mongoose');
 var bodyparser = require('body-parser');
 var cors = require('cors');
 var path = require('path');
-
-
 var app = express();
 
 const route = require('./routes/route');
@@ -14,11 +12,12 @@ const route = require('./routes/route');
 // MONGO connect
 
 // connect to mongo
-mongoose.connect('url');
+mongoose.connect('mongodb://localhost:27017/mydb');
 
 // on connection
 mongoose.connection.on('connected',()=>{
     console.log('connect to database');
+	console.log('hello, world from database')
 });
 
 mongoose.connection.on('error',(err)=>{
