@@ -27,8 +27,21 @@ res.send(err);
 // login
 // get method
 router.get('/login',(req,res,next)=>{
-    User.find(function(err, user){
-        res.json(user);
+    User.find({'first_name': req.body.first, 'last_name': req.body.last}).exec(function(err, user){
+        if(err){
+            // log the error
+			res.send(err);
+        }
+        else{
+            // succssfull 
+			if(user.length === 0){
+				res.send('user not found');
+			}
+			else{
+				req.session.userId = user._id;
+				res.send(user);
+			}
+        }
     })
 });
 router.get('/index',function(req,res) {
