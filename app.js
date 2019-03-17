@@ -5,6 +5,8 @@ var bodyparser = require('body-parser');
 var cors = require('cors');
 var path = require('path');
 var app = express();
+var session = require('express-session')
+
 
 const route = require('./routes/route');
 
@@ -36,6 +38,14 @@ app.use(cors());
 app.use(bodyparser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
+
 
 app.use('/api',route);
 
