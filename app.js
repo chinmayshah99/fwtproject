@@ -7,12 +7,9 @@ var path = require('path');
 var app = express();
 var session = require('express-session')
 
-
 const route = require('./routes/route');
 
-
 // MONGO connect
-
 // connect to mongo
 mongoose.connect('mongodb://localhost:27017/mydb');
 
@@ -34,7 +31,6 @@ const port = 3000;
 
 
 app.use(cors());
-
 app.use(bodyparser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));

@@ -1,14 +1,17 @@
 var mongoose = require('mongoose');
 
 const BlogSchema = mongoose.Schema({
-    first_name:{
-        type: String,
+    // user id
+    user_id:{
+        type: ObjectId, // check syntax
 		required: true
     },
+    // name of trek
     location:{
         type: String,
 		required: true
     },
+    // actual user review
 	review:{
 		type: String
 	}

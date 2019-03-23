@@ -2,24 +2,25 @@ var express = require('express');
 const router = express.Router();
 
 const User = require('../models/user');
+
 // signup 
 // post method
-router.post('/contacts',(req,res,next)=>{
-console.log(req.body);
+router.post('/signup',(req,res,next)=>{
+    console.log(req.body);
     let newUser = new User({
         first_name: req.body.first,
         last_name: req.body.last
     });
-console.log(newUser);
+    console.log(newUser);
 
     newUser.save(function(err){
         if(err){
             // log the error
-res.send(err);
+            res.send(err);
         }
         else{
             // succssfull 
-		res.send('hello');
+		    res.send('hello');
         }
     });
 });
@@ -39,15 +40,31 @@ router.get('/login',(req,res,next)=>{
 			}
 			else{
 				req.session.userId = user._id;
-				res.send(user);
+                res.send(user);
+                return res.redirect('/');
 			}
         }
     })
 });
+
+
 router.get('/index',function(req,res) {
     res.status(200).send('hi');
 });
 
+
+router.get('/logout',function(req,res) {
+    if (req.session) {
+        // delete session object
+        req.session.destroy(function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                return res.redirect('/');
+            }
+        });
+    }
+});
 
 
 module.exports = router;
