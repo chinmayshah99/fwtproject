@@ -1,12 +1,15 @@
 var express = require('express');
 const router = express.Router();
 
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: true });
+
 const User = require('../models/user');
 
 // signup 
 // post method
-router.post('/signup',(req,res,next)=>{
-    console.log(req.body);
+router.post('/signup/',urlencodedParser, (req,res,next)=>{
+    console.log(JSON.stringify(req.body));
     let newUser = new User({
         first_name: req.body.first,
         last_name: req.body.last
@@ -20,8 +23,9 @@ router.post('/signup',(req,res,next)=>{
         }
         else{
             // succssfull 
-		    res.send('hello');
-        }
+		    // res.send('hello');
+		    res.redirect('/test.html');
+		}
     });
 });
 
