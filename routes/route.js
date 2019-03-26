@@ -25,7 +25,7 @@ function comparePassword(plainPass, hashword) {
 router.post('/signup/',urlencodedParser, (req,res,next)=>{
     console.log(JSON.stringify(req.body));
     let newUser = new User({
-        email: req.body.email,
+        email: req.body.emaill,
         password: cryptPassword(req.body.password),
         first_name: req.body.first,
         last_name: req.body.last
@@ -35,9 +35,10 @@ router.post('/signup/',urlencodedParser, (req,res,next)=>{
     newUser.save(function(err){
         if(err){
             // log the error
-            res.send(err);
+            res.redirect('/signin.html')
         }
         else{
+        		req.session.user = user._id;
 		    	res.send('hello');
 		        // res.redirect('/test.html');
 		}
@@ -48,7 +49,7 @@ router.post('/signup/',urlencodedParser, (req,res,next)=>{
 // get method
 router.post('/login',urlencodedParser,(req,res,next)=>{
 	console.log(req.body);
-    User.findOne({'email': req.body.email},'password').project().exec(function(err, user){
+    User.findOne({'email': req.body.email},'password').exec(function(err, user){
         if(err){
             // log the error
 			res.send(err);
@@ -62,8 +63,8 @@ router.post('/login',urlencodedParser,(req,res,next)=>{
                 // check for invalid password
                 
                 if(comparePassword(req.body.password,user.password)){
-                    req.session.userId = user._id;
-                    res.send(user);
+                    req.session.user = user._id;
+                    // res.send(user);
                     return res.redirect('/');    
                 }
                 else{
