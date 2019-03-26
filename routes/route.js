@@ -9,17 +9,15 @@ const User = require('../models/user');
 // password encryption
 var bcrypt = require('bcrypt');
 
+// encrypts password
 function cryptPassword(password) {
-   // console.log(bcrypt.genSalt(10));
     var salt1 = bcrypt.genSaltSync(8);
-
 	return bcrypt.hashSync(password,salt1,null);
-    
 };
+
 
 function comparePassword(plainPass, hashword) {
    return bcrypt.compareSync(plainPass, hashword);
-
 };
 
 // signup 
@@ -27,6 +25,8 @@ function comparePassword(plainPass, hashword) {
 router.post('/signup/',urlencodedParser, (req,res,next)=>{
     console.log(JSON.stringify(req.body));
     let newUser = new User({
+        email: req.body.email,
+        password: cryptPassword(req.body.password),
         first_name: req.body.first,
         last_name: req.body.last
     });
@@ -38,11 +38,8 @@ router.post('/signup/',urlencodedParser, (req,res,next)=>{
             res.send(err);
         }
         else{
-            	console.log(cryptPassword(req.body.password));
 		    	res.send('hello');
-
-		    
-		    // res.redirect('/test.html');
+		        // res.redirect('/test.html');
 		}
     });
 });
@@ -51,7 +48,7 @@ router.post('/signup/',urlencodedParser, (req,res,next)=>{
 // get method
 router.post('/login',urlencodedParser,(req,res,next)=>{
 	console.log(req.body);
-    User.find({'first_name': req.body.first, 'last_name': req.body.last}).exec(function(err, user){
+    User.findOne({'email': req.body.email},'password').project().exec(function(err, user){
         if(err){
             // log the error
 			res.send(err);
@@ -62,9 +59,17 @@ router.post('/login',urlencodedParser,(req,res,next)=>{
 				res.send('user not found');
 			}
 			else{
-				req.session.userId = user._id;
-                res.send(user);
-                return res.redirect('/');
+                // check for invalid password
+                
+                if(comparePassword(req.body.password,user.password)){
+                    req.session.userId = user._id;
+                    res.send(user);
+                    return res.redirect('/');    
+                }
+                else{
+                    return res.redirect('/sigin.html');    
+                }
+				
 			}
         }
     })
