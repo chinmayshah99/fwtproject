@@ -39,8 +39,8 @@ router.post('/signup/',urlencodedParser, (req,res,next)=>{
         }
         else{
         		req.session.user = user._id;
-		    	res.send('hello');
-		        // res.redirect('/test.html');
+		    	// res.send('hello');
+		        res.redirect('/welcome.html');
 		}
     });
 });
@@ -65,7 +65,7 @@ router.post('/login',urlencodedParser,(req,res,next)=>{
                 if(comparePassword(req.body.password,user.password)){
                     req.session.user = user._id;
                     // res.send(user);
-                    return res.redirect('/');    
+                    res.redirect('/welcome.html');
                 }
                 else{
                     return res.redirect('/sigin.html');    
