@@ -31,7 +31,8 @@ router.post('/signup/',urlencodedParser, (req,res,next)=>{
 
 // login
 // get method
-router.get('/login',(req,res,next)=>{
+router.post('/login',urlencodedParser,(req,res,next)=>{
+	console.log(req.body);
     User.find({'first_name': req.body.first, 'last_name': req.body.last}).exec(function(err, user){
         if(err){
             // log the error

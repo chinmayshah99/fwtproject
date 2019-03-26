@@ -23,18 +23,18 @@
     <li class="tab col s3"><a class="white-text" href="#register">register</a></li>
   </ul>
   <div id="login" class="col s12">
-    <form class="col s12" action="localhost:3000/api/login" method="GET">
+    <form class="col s12" action="/api/login" method="POST">
       <div class="form-container">
         <h3 class="teal-text" align="center">Sign In</h3>
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
+            <input name = "email" id="email" type="email" class="validate">
             <label for="email">Email</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="password" type="password" class="validate">
+            <input name = "password" id="password" type="password" class="validate">
             <label for="password">Password</label>
           </div>
         </div>
@@ -49,16 +49,16 @@
     </form>
   </div>
   <div id="register" class="col s12">
-    <form class="col s12" action="localhost:3000/api/signup" method="POST">
+    <form class="col s12" action="/api/signup" method="POST">
       <div class="form-container">
         <h3 class="teal-text" align="center">Sign Up</h3>
         <div class="row">
           <div class="input-field col s6">
-            <input id="first_name" type="text" class="validate">
+            <input name = "first" id="first_name" type="text" class="validate">
             <label for="first_name">First Name</label>
           </div>
           <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
+            <input name = "last" id="last_name" type="text" class="validate">
             <label for="last_name">Last Name</label>
           </div>
         </div>
@@ -68,7 +68,7 @@
       </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="email1" type="email" class="validate">
+            <input name ="emaill" id="email1" type="email" class="validate">
             <label for="email1">Email</label>
           </div>
         </div>
@@ -79,7 +79,7 @@
       </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="password1" type="password" class="validate" onchange="start()">
+            <input id="password1" name = "password" type="password" class="validate" onchange="start()">
             <label for="password1">Password</label>
           </div>
         </div>
