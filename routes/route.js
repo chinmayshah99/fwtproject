@@ -6,6 +6,22 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 const User = require('../models/user');
 
+// password encryption
+var bcrypt = require('bcrypt');
+
+function cryptPassword(password) {
+   // console.log(bcrypt.genSalt(10));
+    var salt1 = bcrypt.genSaltSync(8);
+
+	return bcrypt.hashSync(password,salt1,null);
+    
+};
+
+function comparePassword(plainPass, hashword) {
+   return bcrypt.compareSync(plainPass, hashword);
+
+};
+
 // signup 
 // post method
 router.post('/signup/',urlencodedParser, (req,res,next)=>{
@@ -22,9 +38,11 @@ router.post('/signup/',urlencodedParser, (req,res,next)=>{
             res.send(err);
         }
         else{
-            // succssfull 
-		    // res.send('hello');
-		    res.redirect('/test.html');
+            	console.log(cryptPassword(req.body.password));
+		    	res.send('hello');
+
+		    
+		    // res.redirect('/test.html');
 		}
     });
 });
