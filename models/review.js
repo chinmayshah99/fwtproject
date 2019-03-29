@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 const BlogSchema = mongoose.Schema({
     // user id
     user_id:{
-        type: ObjectId, // check syntax
+        type: mongoose.Schema.Types.ObjectId, // check syntax
 		required: true
     },
     // name of trek
