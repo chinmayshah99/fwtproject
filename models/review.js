@@ -12,7 +12,7 @@ const BlogSchema = mongoose.Schema({
 		required: true
     },
     // actual user review
-	review:{
+	a_review:{
 		type: String
 	}
 });
