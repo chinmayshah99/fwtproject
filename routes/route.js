@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 const User = require('../models/user');
+const Review = require('../models/review');
 
 // password encryption
 var bcrypt = require('bcrypt');
@@ -62,8 +63,9 @@ router.post('/login',urlencodedParser,(req,res,next)=>{
 			else{
                 // check for invalid password           
                 if(comparePassword(req.body.password,user.password)){
-                    // req.session.user = user._id;
+                    req.session.user = user._id;
                     // res.send(user);
+                    //res.send(req.session.user);
                     res.redirect('/welcome.html');
                 }
                 else{
@@ -80,7 +82,7 @@ router.post('/login',urlencodedParser,(req,res,next)=>{
 router.get('/reviewpost/',urlencodedParser, (req,res,next)=>{
     console.log(JSON.stringify(req.body));
     let newReview = new Review({
-        user_id: req.session.user,
+        user_id: '5c9a3f194faf5913b1412839',
         location: req.body.location,
         a_review: req.body.rreview
     });
@@ -92,8 +94,8 @@ router.get('/reviewpost/',urlencodedParser, (req,res,next)=>{
             console.log(err);
         }
         else{
-		    	// res.send('hello');
-		        res.redirect('/welcome.html');
+		    	res.send('hello');
+		        //res.redirect('/welcome.html');
 		}
     });
 });
@@ -124,9 +126,9 @@ router.get('/reviewsearchtotal/',urlencodedParser, (req,res,next)=>{
 
 // display last N reviews by location 
 // post method
-router.get('/reviewsearch/',urlencodedParser, (req,res,next)=>{
+router.get('/reviewsearchl/',urlencodedParser, (req,res,next)=>{
     console.log(JSON.stringify(req.body));
-    Review.find({'location': req.body.location},'a_review').reverse().limit(3).exec(function(err, user){
+    Review.find({'location': req.body.location},'a_review').sort('-date').limit(3).exec(function(err, user){
         if(err){
             // log the error
 			res.send(err);
@@ -137,7 +139,8 @@ router.get('/reviewsearch/',urlencodedParser, (req,res,next)=>{
 				res.send('review not found');
 			}
 			else{
-                    return res.redirect('/');    
+                    res.send(user);
+                    //return res.redirect('/');    
             }		
 		}
     })
@@ -148,7 +151,7 @@ router.get('/reviewsearch/',urlencodedParser, (req,res,next)=>{
 // post method
 router.get('/reviewsearch/',urlencodedParser, (req,res,next)=>{
     console.log(JSON.stringify(req.body));
-    Review.find({'user_id': req.session.user},'location a_review').reverse().limit(3).exec(function(err, user){
+    Review.find({'user_id': req.session.user},'location a_review').limit(3).reverse().exec(function(err, user){
         if(err){
             // log the error
 			res.send(err);
