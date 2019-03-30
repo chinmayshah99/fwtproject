@@ -17,4 +17,4 @@ const BlogSchema = mongoose.Schema({
 	}
 });
 
-const Review = module.exports = mongoose.model('user_review', BlogSchema);
+const Review = module.exports = mongoose.model('user_reviews', BlogSchema);
