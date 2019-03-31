@@ -95,8 +95,9 @@ router.post('/reviewpost/',urlencodedParser, (req,res,next)=>{
             console.log(err);
         }
         else{
-		    	res.send('hello');
+		    	// res.send('hello');
 		        //res.redirect('/welcome.html');
+                res.status(200);
 		}
     });
 });
