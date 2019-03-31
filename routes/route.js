@@ -153,7 +153,7 @@ router.get('/reviewsearchloc/',urlencodedParser, (req,res,next)=>{
 // post method
 router.get('/reviewsearchuser/',urlencodedParser, (req,res,next)=>{
     console.log(JSON.stringify(req.body));
-    Review.find({'user_id': '5c9a3f194faf5913b1412839'},'location a_review').sort({'_id': -1}).limit(3).exec(function(err, user){
+    Review.find({'user_id': '5c9a3f194faf5913b1412839'},'location a_review').sort({'_id': -1}).limit(4).exec(function(err, user){
         if(err){
             // log the error
 			res.send(err);
