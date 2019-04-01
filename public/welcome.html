@@ -30,12 +30,13 @@
 
       $.getJSON('/api/reviewsearchall',function(result){
         console.log("here");
-        console.log(result);
-        jQuery(result).each(function(i, item){
-          var var_name_loc = "#r_l1";
-        $(var_name_loc).empty();
-        $(var_name_loc).append(item.a_review);
-        });
+        console.log(result[0]);
+        $("#r_l1").empty();
+        $("#r_l1").append(result[0].a_review);
+        // jQuery(result).each(function(i, item){
+        // console.log(item)
+        
+        // });
       });
 
     });
@@ -215,7 +216,7 @@
           </div>
         </div>
 
-        <div class="nonloop-block-13 owl-carousel">
+        <div>
 
           <div class="item">
             <div class="container">
