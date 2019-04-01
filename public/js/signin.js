@@ -89,7 +89,7 @@ function repassword() {
         document.getElementById("alertf").innerHTML = "";
         return true;
     } else if ((ps != reps) || (reps.length < 1)) {
-        document.getElementById("alertf").innerHTML = "Password didnot match"
+        document.getElementById("alertf").innerHTML = "Password did not match"
     }
 }
 

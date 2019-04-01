@@ -22,6 +22,25 @@
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
     
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        console.log("doc check");
+
+      $.getJSON('/api/reviewsearchall',function(result){
+        console.log("here");
+        console.log(result);
+        jQuery(result).each(function(i, item){
+          var var_name_loc = "#r_l1";
+        $(var_name_loc).empty();
+        $(var_name_loc).append(item.a_review);
+        });
+      });
+
+    });
+    </script>
+
   </head>
   <body>
   
@@ -64,7 +83,7 @@
                 <li><a href="blog.html">All Blogs</a></li>
                 <li><a href="blogs.html">Write a Blog</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="/">Log Out</a></li>
+                <li><a href="/api/logout">Log Out</a></li>
               </ul>
             </nav>
           </div>
@@ -192,7 +211,7 @@
     <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7">
-            <h2 class="font-weight-light text-black text-center">Recent Blogs</h2>
+            <h2 class="font-weight-light text-black text-center">Recent Blog</h2>
           </div>
         </div>
 
@@ -205,37 +224,9 @@
                   <img src="images/img_1.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 mb-5">
-                  <img src="images/img_2.jpg" alt="Image" class="img-md-fluid">
-                </div>
-                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>Clair Augustin</em>, <a href="#">Traveler</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 mb-5">
-                  <img src="images/img_4.jpg" alt="Image" class="img-md-fluid">
-                </div>
-                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
-                </div>
+                  <p id = "r_l1" class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
+<!--                   <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
+ -->                </div>
               </div>
             </div>
           </div>
@@ -400,7 +391,6 @@
     </footer>
   </div>
 
-  <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/jquery-ui.js"></script>
   <script src="js/popper.min.js"></script>

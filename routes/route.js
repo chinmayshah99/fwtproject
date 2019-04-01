@@ -69,7 +69,7 @@ router.post('/login',urlencodedParser,(req,res,next)=>{
                     res.redirect('/welcome.html');
                 }
                 else{
-                    return res.redirect('/sigin.html');    
+                    return res.redirect('/signin.html');    
                 }		
 			}
         }
@@ -181,7 +181,7 @@ router.get('/logout',function(req,res) {
     if (req.session) {
         // delete session object
         res.clearCookie('user_sid');
-        res.redirect('/');
+        res.redirect('/sigin.html');
     }
 });
 
