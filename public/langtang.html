@@ -24,6 +24,58 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        
+    // Handler for .load() called.
+    var data = {
+      location: 'lang'
+    };
+
+      $.getJSON('/api/reviewratingget', data ,function(result){
+        console.log("here1");
+        console.log(result);
+        $("#rating").empty();
+        $("#rating").append(result);
+      });
+
+
+      $.getJSON('/api/reviewsearchloc',data ,function(result){
+        console.log("here");
+        console.log(result);
+        $("#r_l1").empty();
+        $("#r_l1").append(result[0].a_review);
+        
+        counter = 1
+        jQuery(result).each(function(i, item){
+          var var_name1 = "#r" + counter;
+          console.log(item.a_review);
+          $(var_name1).empty();
+          $(var_name1).append(item.a_review);
+          counter+=1;
+        });
+
+      });
+
+
+
+
+      // $.getJSON('/api/reviewsearchloc',data,function(result){
+      //   console.log("here");
+      //   console.log(result[0]);
+      //   $("#r_l1").empty();
+      //   $("#r_l1").append(result[0].a_review);
+      //   // jQuery(result).each(function(i, item){
+      //   // console.log(item)
+        
+      //   // });
+      // });
+
+    });
+    </script>
     
   </head>
   <body>
@@ -164,14 +216,20 @@
 The trail continues through the Langtang Valley and the verdant gorge of the Langtang Khola. Rhododendrons blend into moss-hung pine trees and you’ll encounter occasional yaks trundling down pastures on their way home. Keep an eye out for Blue Poppy flowers, families of playful langur monkeys and the iridescent Impeyan pheasant, the national bird of Nepal.</p><br><br>
       <h1 align="center">Been here? Recommend it to others!</h1>
       <h3 align="center">Give your feedback</h3>
-    <center><form>
-      <h4><input type="radio" name="one" value="1" > <b>1</b> out of <b>5</b><br>
-      <input type="radio" name="two" value="2" > <b>2</b> out of <b>5</b><br>
-      <input type="radio" name="three" value="3" > <b>3</b> out of <b>5</b><br>
-      <input type="radio" name="four" value="4" > <b>4</b> out of <b>5</b><br>
-      <input type="radio" name="five" value="5" > <b>5</b> out of <b>5</b><br></h4>
-  </form></center> 
+    <center>
+      <form action="/api/reviewratingpost" method="POST">
+        <h4>
+        <input type="text" name="location" value="Gokyo" hidden>
+        <input type="radio" name="o" value="1" > <b>1</b> out of <b>5</b><br>
+        <input type="radio" name="o" value="2" > <b>2</b> out of <b>5</b><br>
+        <input type="radio" name="o" value="3" ><b>3</b> out of <b>5</b><br>
+        <input type="radio" name="o" value="4" checked> <b>4</b> out of <b>5</b><br>
+        <input type="radio" name="o" value="5" > <b>5</b> out of <b>5</b><br>
+      </h4>
+      <button class="btn waves-effect waves-light teal" type="submit" name="action">Submit</button>
+      </form></center> 
     </div>
+
     
     <div class="site-section block-13 bg-light">
   
@@ -183,7 +241,7 @@ The trail continues through the Langtang Valley and the verdant gorge of the Lan
           </div>
         </div>
 
-        <div class="nonloop-block-13 owl-carousel">
+        <div>
 
           <div class="item">
             <div class="container">
@@ -192,42 +250,15 @@ The trail continues through the Langtang Valley and the verdant gorge of the Lan
                   <img src="images/img_1.jpg" alt="Image" class="img-md-fluid">
                 </div>
                 <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 mb-5">
-                  <img src="images/img_2.jpg" alt="Image" class="img-md-fluid">
-                </div>
-                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>Clair Augustin</em>, <a href="#">Traveler</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 mb-5">
-                  <img src="images/img_4.jpg" alt="Image" class="img-md-fluid">
-                </div>
-                <div class="overlap-left col-lg-6 bg-white p-md-5 align-self-center">
-                  <p class="text-black lead">&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
-                  <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p>
+                  <p id = "r_l1" class="text-black lead" >&ldquo; boo1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique dolorem quisquam laudantium, incidunt id laborum, tempora aliquid labore minus. Nemo maxime, veniam! Fugiat odio nam eveniet ipsam atque, corrupti porro&rdquo;</p>
+                  <!-- <p class="">&mdash; <em>James Martin</em>, <a href="#">Traveler</a></p> -->
                 </div>
               </div>
             </div>
           </div>
 
         </div>
+        
       </div>
     </div>
 

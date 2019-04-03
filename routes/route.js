@@ -99,7 +99,7 @@ router.post('/reviewpost/',urlencodedParser, (req,res,next)=>{
 		    	// res.send('hello');
 		        //res.redirect('/welcome.html');
                 // res.status(200);
-                res.redirect('blog.html')
+                res.redirect('/blog.html')
 		}
     });
 });
@@ -183,7 +183,7 @@ router.get('/logout',function(req,res) {
     if (req.session) {
         // delete session object
         res.clearCookie('user_sid');
-        res.redirect('/sigin.html');
+        res.redirect('/buffer.html');
     }
 });
 
@@ -210,12 +210,17 @@ router.post('/reviewratingpost/',urlencodedParser, (req,res,next)=>{
             if (req.body.location == "Gokyo") {
                 res.redirect('/Gokyo.html');
             }
+            else if (req.body.location == "Everest") {
+                res.redirect('/everestbase.html');
+            }
+            else if (req.body.location == "lang") {
+                res.redirect('/langtang.html');
+            }
         }
     });
 });
 
-// review post 
-// post method
+// review get 
 router.get('/reviewratingget/',urlencodedParser, (req,res)=>{
     console.log(JSON.stringify(req.query));
     Rating.find({'location': req.query.location},'a_rating').exec(function(err, user){
@@ -241,6 +246,29 @@ router.get('/reviewratingget/',urlencodedParser, (req,res)=>{
                     var avg = temp/ counter;
                     var send_msg = String(avg);
                     res.send(send_msg);
+            }       
+        }
+    })
+});
+
+
+// review get 
+router.get('/usernameget/',urlencodedParser, (req,res)=>{
+    console.log(req.session.user);
+    User.findOne({'_id': req.session.user},'first_name').exec(function(err, user){
+        if(err){
+            // log the error
+            res.send(err);
+        }
+        else{
+            // succssfull 
+            if(user.length === 0){
+                res.send('user not found');
+            }
+            else{
+                console.log(user);
+                    //return res.redirect('/');   
+                    res.send(user);
             }       
         }
     })

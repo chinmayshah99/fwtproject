@@ -43,6 +43,14 @@
         });
       });
 
+      $.getJSON('/api/usernameget',function(result){
+        console.log("here");
+        console.log(result);
+        counter = 1
+        $('#user_name').empty();
+        $('#user_name').append(result.first_name);
+      });
+
     });
     </script>
 
@@ -122,8 +130,9 @@
           </div>
         </div>
       </div>  
-
-
+<center><br><br>
+    <h4>Hi <span id = 'user_name'></span>,</h4>
+</center>
     
     <div class="site-section">
       <div class="container">

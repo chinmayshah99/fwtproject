@@ -29,7 +29,7 @@ mongoose.connection.on('error',(err)=>{
 
 
 // port
-const port = 3000;
+const port = 8080;
 
 
 app.use(cors());
@@ -75,7 +75,7 @@ app.use('/api',route);
 
 
 app.get('/',(req,res)=>{
-    res.send('foobar');
+    res.redirect('buffer.html');
 });
 
 app.listen(port,()=>{
