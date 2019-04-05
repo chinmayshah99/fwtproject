@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
-const BlogSchema = mongoose.Schema({
+const RatingSchema = mongoose.Schema({
     // user id
     user_id:{
-        type: mongoose.Schema.Types.ObjectId, // check syntax
+        type: mongoose.Schema.Types.ObjectId,
 		required: true
     },
     // name of trek
@@ -12,9 +12,9 @@ const BlogSchema = mongoose.Schema({
 		required: true
     },
     // actual user review
-	a_review:{
-		type: String
+	a_rating:{
+		type: Number
 	}
 });
 
-const Review = module.exports = mongoose.model('user_reviews', BlogSchema);
+const Rating = module.exports = mongoose.model('user_ratings', RatingSchema);
