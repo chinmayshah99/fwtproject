@@ -11,9 +11,8 @@ var cookieParser = require('cookie-parser');
 
 const route = require('./routes/route');
 
-// MONGO connect
-// connect to mongo
-mongoose.connect('mongodb://localhost:27017/mydb');
+const uri = "mongodb+srv://trek_admin:" + process.env.PASS + "@trekgypsy-ub5o4.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(uri, { useNewUrlParser: true });
 
 // on connection
 mongoose.connection.on('connected',()=>{
