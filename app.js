@@ -77,6 +77,6 @@ app.get('/',(req,res)=>{
     res.redirect('buffer.html');
 });
 
-app.listen(port,()=>{
+app.listen(process.env.PORT || port,()=>{
     console.log("server listening at port:" + port);
 });
